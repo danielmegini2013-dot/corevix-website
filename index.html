@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corevix - PC Remote & Monitor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Heebo', 'sans-serif'],
+                    },
+                    colors: {
+                        slateDark: '#0b0f19',
+                        slateCard: '#131b2e',
+                        neonBlue: '#3b82f6',
+                        neonPurple: '#8b5cf6',
+                        neonCyan: '#06b6d4'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+        }
+        .glass-panel {
+            background: rgba(19, 27, 46, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-panel-hover:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.15);
+        }
+        .glow-text {
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+        html:lang(en) {
+            direction: ltr;
+        }
+        html:lang(en) .rtl-only {
+            display: none;
+        }
+        html:lang(he) .ltr-only {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-slateDark text-gray-100 min-h-screen selection:bg-neonPurple selection:text-white">
+
+    <!-- Language Switcher -->
+    <div class="fixed top-24 right-4 z-40 flex gap-2">
+        <button onclick="setLanguage('he')" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-medium text-sm transition-all hover:bg-blue-500" id="lang-he">
+            עברית
+        </button>
+        <button onclick="setLanguage('en')" class="px-3 py-1.5 rounded-lg bg-gray-700 text-gray-300 font-medium text-sm transition-all hover:bg-gray-600" id="lang-en">
+            English
+        </button>
+    </div>
+
+    <nav class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/30">
+                    <i class="fa-solid font-bold">C</i>
+                </div>
+                <span class="text-2xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400">
+                    COREVIX
+                </span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-gray-300 font-medium">
+                <a href="#features" class="hover:text-blue-400 transition-colors rtl-only">תכונות</a>
+                <a href="#features" class="hover:text-blue-400 transition-colors ltr-only">Features</a>
+                
+                <a href="#demo" class="hover:text-blue-400 transition-colors rtl-only">הדגמה חיה</a>
+                <a href="#demo" class="hover:text-blue-400 transition-colors ltr-only">Live Demo</a>
+                
+                <a href="#download" class="hover:text-blue-400 transition-colors rtl-only">הורדה</a>
+                <a href="#download" class="hover:text-blue-400 transition-colors ltr-only">Download</a>
+            </div>
+
+            <div>
+                <a href="https://play.google.com/store/apps/details?id=com.corevix.remote" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-purple-600/20 flex items-center gap-2 text-sm sm:text-base">
+                    <i class="fa-brands fa-google-play"></i>
+                    <span class="rtl-only">הורד בגוגל פליי</span>
+                    <span class="ltr-only">Download</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+        <div class="absolute top-1/4 right-10 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 left-10 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-6 text-center lg:text-right space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-blue-500/30 text-blue-400 text-sm font-medium">
+                        <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
+                        <span class="rtl-only">אפליקציית ניטור ושליטה מרחוק למחשב</span>
+                        <span class="ltr-only">PC Remote Control & Monitoring App</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+                        Corevix <br>
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 glow-text">
+                            <span class="rtl-only">שלט רחוק וניטור המחשב</span>
+                            <span class="ltr-only">Remote Control & Monitoring</span>
+                        </span>
+                    </h1>
+
+                    <p class="text-gray-300 text-lg sm:text-xl leading-relaxed font-light">
+                        <span class="rtl-only">שלט רחוק וניטור המחשב שלך ישירות מהטלפון. שים עין על ביצועי ה-CPU, GPU והטמפרטורה, ובצע פעולות כיבוי ושליטה בזמן אמת מכל מקום.</span>
+                        <span class="ltr-only">Control and monitor your PC directly from your phone. Keep an eye on CPU, GPU performance and temperature, and perform shutdown and control operations in real-time from anywhere.</span>
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <!-- Google Play Badge Button -->
+                        <a href="https://play.google.com/store/apps/details?id=com.corevix.remote" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto transform hover:scale-105 transition-transform">
+                            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="h-14">
+                        </a>
+                        <a href="#features" class="w-full sm:w-auto glass-panel hover:bg-slate-800/80 text-gray-200 font-semibold px-8 py-4 rounded-xl border border-gray-700 transition-all text-center">
+                            <span class="rtl-only">למד עוד</span>
+                            <span class="ltr-only">Learn More</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 relative">
+                    <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-gray-800 shadow-2xl relative z-10">
+                        <div class="flex items-center justify-between border-b border-gray-800 pb-4 mb-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                <span class="text-xs text-gray-400 font-mono mr-2">Corevix Remote Monitor v1.0</span>
+                            </div>
+                            <div class="flex items-center gap-2 bg-green-500/10 text-green-400 px-3 py-1 rounded-full text-xs font-medium border border-green-500/20">
+                                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                                <span class="rtl-only">מחובר</span>
+                                <span class="ltr-only">Connected</span>
+                            </div>
+                        </div>
+
+                        <!-- System Stats Mockup -->
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="glass-panel p-4 rounded-2xl border border-gray-800">
+                                <div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+                                    <span class="rtl-only">מעבד (CPU)</span>
+                                    <span class="ltr-only">CPU</span>
+                                    <i class="fa-solid fa-microchip text-blue-400"></i>
+                                </div>
+                                <div class="text-2xl font-bold text-blue-400 font-mono mb-2" id="hero-cpu-val">42%</div>
+                                <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-blue-500 h-full transition-all duration-500" id="hero-cpu-bar" style="width: 42%"></div>
+                                </div>
+                            </div>
+
+                            <div class="glass-panel p-4 rounded-2xl border border-gray-800">
+                                <div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+                                    <span class="rtl-only">כרטיס מסך (GPU)</span>
+                                    <span class="ltr-only">GPU</span>
+                                    <i class="fa-solid fa-display text-purple-400"></i>
+                                </div>
+                                <div class="text-2xl font-bold text-purple-400 font-mono mb-2" id="hero-gpu-val">58%</div>
+                                <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-purple-500 h-full transition-all duration-500" id="hero-gpu-bar" style="width: 58%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="glass-panel p-4 rounded-2xl border border-gray-800">
+                                <div class="flex justify-between items-center text-xs text-gray-400 mb-1">
+                                    <span class="rtl-only">זיכרון RAM</span>
+                                    <span class="ltr-only">RAM</span>
+                                    <i class="fa-solid fa-memory text-cyan-400"></i>
+                                </div>
+                                <div class="text-lg font-bold text-gray-100 font-mono">8.4 / 16 GB</div>
+                            </div>
+
+                            <div class="glass-panel p-4 rounded-2xl border border-gray-800">
+                                <div class="flex justify-between items-center text-xs text-gray-400 mb-1">
+                                    <span class="rtl-only">טמפרטורה</span>
+                                    <span class="ltr-only">Temp</span>
+                                    <i class="fa-solid fa-temperature-half text-red-400"></i>
+                                </div>
+                                <div class="text-lg font-bold text-red-400 font-mono">54°C</div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <span class="text-xs text-gray-400 block mb-3 font-medium rtl-only">פעולות מהירות מרחוק</span>
+                            <span class="text-xs text-gray-400 block mb-3 font-medium ltr-only">Remote Quick Actions</span>
+                            <div class="grid grid-cols-3 gap-3">
+                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-2.5 rounded-xl text-xs font-medium border border-gray-700 flex flex-col items-center gap-1">
+                                    <i class="fa-solid fa-power-off text-red-400"></i>
+                                    <span class="rtl-only">כיבוי</span>
+                                    <span class="ltr-only">Shutdown</span>
+                                </button>
+                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-2.5 rounded-xl text-xs font-medium border border-gray-700 flex flex-col items-center gap-1">
+                                    <i class="fa-solid fa-rotate-right text-yellow-400"></i>
+                                    <span class="rtl-only">הפעלה מחדש</span>
+                                    <span class="ltr-only">Restart</span>
+                                </button>
+                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-2.5 rounded-xl text-xs font-medium border border-gray-700 flex flex-col items-center gap-1">
+                                    <i class="fa-solid fa-moon text-blue-400"></i>
+                                    <span class="rtl-only">מצב שינה</span>
+                                    <span class="ltr-only">Sleep</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                    <span class="rtl-only">כל הכלים שאתה צריך לשליטה מלאה</span>
+                    <span class="ltr-only">All the tools you need for complete control</span>
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    <span class="rtl-only">Corevix מביאה את חדר הבקרה של המחשב שלך ישירות לכף היד, עם ממשק חכם, מהיר ומאובטח.</span>
+                    <span class="ltr-only">Corevix brings your PC's control room directly to your palm, with a smart, fast and secure interface.</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-panel p-8 rounded-3xl border border-gray-800 glass-panel-hover transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl mb-6">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">
+                        <span class="rtl-only">ניטור בזמן אמת</span>
+                        <span class="ltr-only">Real-Time Monitoring</span>
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        <span class="rtl-only">עקוב אחר העומס על המעבד, הזיכרון, כרטיס המסך והטמפרטורה ברזולוציה גבוהה ובזמן אמת.</span>
+                        <span class="ltr-only">Track CPU load, memory, graphics card and temperature in high resolution and real-time.</span>
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl border border-gray-800 glass-panel-hover transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-6">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">
+                        <span class="rtl-only">שליטה מרחוק</span>
+                        <span class="ltr-only">Remote Control</span>
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        <span class="rtl-only">שלט במחשב מהטלפון בקלות ובנוחות ללא סיבוכים, תוך שמירה על תגובה מהירה וממשק נוח.</span>
+                        <span class="ltr-only">Control your PC from your phone easily and conveniently without complications, while maintaining fast response and convenient interface.</span>
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl border border-gray-800 glass-panel-hover transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl mb-6">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">
+                        <span class="rtl-only">חיבור מהיר ומאובטח</span>
+                        <span class="ltr-only">Fast & Secure Connection</span>
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        <span class="rtl-only">פרוטוקול תקשורת מאובטח המבטיח שרק אתה יכול להתחבר ולשלוט על המחשב שלך בבטחה מלאה.</span>
+                        <span class="ltr-only">Secure communication protocol ensuring only you can connect and control your PC with complete safety.</span>
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl border border-gray-800 glass-panel-hover transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 text-2xl mb-6">
+                        <i class="fa-solid fa-power-off"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">
+                        <span class="rtl-only">כיבוי והפעלה מרחוק</span>
+                        <span class="ltr-only">Remote Power Control</span>
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        <span class="rtl-only">בצע כיבוי, הפעלה מחדש או העברה למצב שינה בלחיצת כפתור אחת.</span>
+                        <span class="ltr-only">Perform shutdown, restart or sleep mode with a single click.</span>
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl border border-gray-800 glass-panel-hover transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl mb-6">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">
+                        <span class="rtl-only">התראות חמות</span>
+                        <span class="ltr-only">Hot Alerts</span>
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        <span class="rtl-only">קבל התראות מיידיות במידה והטמפרטורה או העומס על המחשב עוברים סף מוגדר מראש.</span>
+                        <span class="ltr-only">Get instant alerts if temperature or PC load exceeds a preset threshold.</span>
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl border border-gray-800 glass-panel-hover transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl mb-6">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">
+                        <span class="rtl-only">התאמה אישית</span>
+                        <span class="ltr-only">Customization</span>
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        <span class="rtl-only">עצב את דשבורד המחשב שלך בדיוק כפי שאתה אוהב עם נתונים ווידג'טים מותאמים אישית.</span>
+                        <span class="ltr-only">Design your PC dashboard exactly as you like it with custom data and widgets.</span>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="py-20 bg-slateCard/30 border-y border-gray-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-purple-400 font-semibold tracking-wider text-sm uppercase rtl-only">הדגמה אינטראקטיבית</span>
+                    <span class="text-purple-400 font-semibold tracking-wider text-sm uppercase ltr-only">Interactive Demo</span>
+                    
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+                        <span class="rtl-only">נסה את הלוח הדינמי עכשיו</span>
+                        <span class="ltr-only">Try the dynamic dashboard now</span>
+                    </h2>
+                    
+                    <p class="text-gray-300 leading-relaxed">
+                        <span class="rtl-only">שחק עם הסליידרים כדי לראות כיצד התצוגה של Corevix מגיבה בזמן אמת לשינויים בביצועי המערכת.</span>
+                        <span class="ltr-only">Play with the sliders to see how Corevix's display responds in real-time to changes in system performance.</span>
+                    </p>
+
+                    <div class="space-y-4 pt-4">
+                        <div>
+                            <div class="flex justify-between text-sm font-medium mb-1">
+                                <span class="rtl-only">סימולציית עומס CPU:</span>
+                                <span class="ltr-only">CPU Load Simulation:</span>
+                                <span id="demo-cpu-text" class="text-blue-400 font-mono">50%</span>
+                            </div>
+                            <input type="range" id="demo-cpu-input" min="10" max="100" value="50" class="w-full accent-blue-500 cursor-pointer">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm font-medium mb-1">
+                                <span class="rtl-only">סימולציית עומס GPU:</span>
+                                <span class="ltr-only">GPU Load Simulation:</span>
+                                <span id="demo-gpu-text" class="text-purple-400 font-mono">65%</span>
+                            </div>
+                            <input type="range" id="demo-gpu-input" min="10" max="100" value="65" class="w-full accent-purple-500 cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="glass-panel p-8 rounded-3xl border border-gray-800 shadow-xl space-y-6">
+                        <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                            <span class="font-bold text-gray-200 rtl-only">סטאטוס לוח בקרה live</span>
+                            <span class="font-bold text-gray-200 ltr-only">Live Dashboard Status</span>
+                            <span class="text-xs text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 ltr-only">Sync OK</span>
+                            <span class="text-xs text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 rtl-only">סנכרון תקין</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="bg-slateDark/60 p-5 rounded-2xl border border-gray-800">
+                                <span class="text-sm text-gray-400 block mb-2 rtl-only">שימוש ב-CPU</span>
+                                <span class="text-sm text-gray-400 block mb-2 ltr-only">CPU Usage</span>
+                                <div class="text-3xl font-extrabold text-blue-400 font-mono mb-3" id="demo-cpu-display">50%</div>
+                                <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden">
+                                    <div id="demo-cpu-bar" class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full transition-all duration-200" style="width: 50%"></div>
+                                </div>
+                            </div>
+
+                            <div class="bg-slateDark/60 p-5 rounded-2xl border border-gray-800">
+                                <span class="text-sm text-gray-400 block mb-2 rtl-only">שימוש ב-GPU</span>
+                                <span class="text-sm text-gray-400 block mb-2 ltr-only">GPU Usage</span>
+                                <div class="text-3xl font-extrabold text-purple-400 font-mono mb-3" id="demo-gpu-display">65%</div>
+                                <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden">
+                                    <div id="demo-gpu-bar" class="bg-gradient-to-r from-purple-500 to-pink-400 h-full transition-all duration-200" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 pt-4">
+                            <div class="bg-slateDark/60 p-4 rounded-xl border border-gray-800">
+                                <span class="text-xs text-gray-400 block mb-1 rtl-only">זיכרון</span>
+                                <span class="text-xs text-gray-400 block mb-1 ltr-only">Memory</span>
+                                <div class="text-lg font-bold text-cyan-400 font-mono">8.4 / 16 GB</div>
+                            </div>
+                            <div class="bg-slateDark/60 p-4 rounded-xl border border-gray-800">
+                                <span class="text-xs text-gray-400 block mb-1 rtl-only">טמפרטורה</span>
+                                <span class="text-xs text-gray-400 block mb-1 ltr-only">Temperature</span>
+                                <div class="text-lg font-bold text-red-400 font-mono">54°C</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                    <span class="rtl-only">התחל עכשיו</span>
+                    <span class="ltr-only">Get Started Now</span>
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    <span class="rtl-only">בחר את הפלטפורמה שלך והתחל בניטור ובשליטה במחשב שלך מיד</span>
+                    <span class="ltr-only">Choose your platform and start monitoring and controlling your PC immediately</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Mobile Download -->
+                <div class="glass-panel p-10 rounded-3xl border border-gray-800 glass-panel-hover transition-all duration-300 flex flex-col items-center text-center space-y-6">
+                    <div class="w-20 h-20 rounded-3xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-5xl">
+                        <i class="fa-brands fa-android"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">
+                        <span class="rtl-only">אפליקציית Android</span>
+                        <span class="ltr-only">Android App</span>
+                    </h3>
+                    <p class="text-gray-400">
+                        <span class="rtl-only">הורד את Corevix ל-Android ישירות מ-Google Play</span>
+                        <span class="ltr-only">Download Corevix for Android directly from Google Play</span>
+                    </p>
+                    <a href="https://play.google.com/store/apps/details?id=com.corevix.remote" target="_blank" rel="noopener noreferrer" class="w-full transform hover:scale-105 transition-transform">
+                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="h-16 mx-auto">
+                    </a>
+                </div>
+
+                <!-- Desktop Download -->
+                <div class="glass-panel p-10 rounded-3xl border border-gray-800 glass-panel-hover transition-all duration-300 flex flex-col items-center text-center space-y-6">
+                    <div class="w-20 h-20 rounded-3xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-5xl">
+                        <i class="fa-brands fa-windows"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">
+                        <span class="rtl-only">תוכנה למחשב Windows</span>
+                        <span class="ltr-only">Windows PC Software</span>
+                    </h3>
+                    <p class="text-gray-400">
+                        <span class="rtl-only">הורד את שרת Corevix עבור Windows והתחל לשלוט מרחוק</span>
+                        <span class="ltr-only">Download Corevix server for Windows and start remote control</span>
+                    </p>
+                    <a href="downloads/corevix-server.exe" download class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg shadow-purple-600/25 flex items-center gap-3 transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-download"></i>
+                        <div class="text-right">
+                            <div class="text-xs font-normal rtl-only">הורדה עכשיו</div>
+                            <div class="text-xs font-normal ltr-only">Download Now</div>
+                            <div class="text-sm font-bold">corevix-server.exe</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-gray-800 py-12 bg-slateDark/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            <p class="rtl-only">© 2024 Corevix. כל הזכויות שמורות.</p>
+            <p class="ltr-only">© 2024 Corevix. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language Switcher
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+            
+            const heBtn = document.getElementById('lang-he');
+            const enBtn = document.getElementById('lang-en');
+            
+            if (lang === 'he') {
+                heBtn.classList.add('bg-blue-600');
+                heBtn.classList.remove('bg-gray-700');
+                heBtn.classList.add('text-white');
+                heBtn.classList.remove('text-gray-300');
+                
+                enBtn.classList.remove('bg-blue-600');
+                enBtn.classList.add('bg-gray-700');
+                enBtn.classList.remove('text-white');
+                enBtn.classList.add('text-gray-300');
+            } else {
+                enBtn.classList.add('bg-blue-600');
+                enBtn.classList.remove('bg-gray-700');
+                enBtn.classList.add('text-white');
+                enBtn.classList.remove('text-gray-300');
+                
+                heBtn.classList.remove('bg-blue-600');
+                heBtn.classList.add('bg-gray-700');
+                heBtn.classList.remove('text-white');
+                heBtn.classList.add('text-gray-300');
+            }
+        }
+
+        // Demo Slider Functionality
+        const cpuInput = document.getElementById('demo-cpu-input');
+        const gpuInput = document.getElementById('demo-gpu-input');
+
+        cpuInput.addEventListener('input', (e) => {
+            const value = e.target.value;
+            document.getElementById('demo-cpu-text').textContent = value + '%';
+            document.getElementById('demo-cpu-display').textContent = value + '%';
+            document.getElementById('demo-cpu-bar').style.width = value + '%';
+        });
+
+        gpuInput.addEventListener('input', (e) => {
+            const value = e.target.value;
+            document.getElementById('demo-gpu-text').textContent = value + '%';
+            document.getElementById('demo-gpu-display').textContent = value + '%';
+            document.getElementById('demo-gpu-bar').style.width = value + '%';
+        });
+
+        // Initialize language
+        setLanguage('he');
+    </script>
+</body>
+</html>
